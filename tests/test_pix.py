@@ -32,3 +32,15 @@ def test_deve_identificar_chaves_pix_validas(chave, tipo_esperado):
 def test_deve_lancar_excecao_para_chave_pix_invalida(chave):
     with pytest.raises(ChavePixInvalidaError):
         validar_chave_pix(chave)
+
+@pytest.mark.parametrize(
+    "chave",
+    [
+        "",
+        None,
+        12345678901,
+    ],
+)
+def test_deve_rejeitar_chave_ausente_ou_de_tipo_incorreto(chave):
+    with pytest.raises(ChavePixInvalidaError):
+        validar_chave_pix(chave)
